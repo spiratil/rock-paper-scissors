@@ -1,25 +1,14 @@
 let humanScore = 0;
 let computerScore = 0;
 
-let getComputerChoice = function() {
-  // Generate a random number between 1 and 3
-  let rand = Math.ceil(Math.random() * 3);
-  // Return the appropriate choice
-  if (rand == 1) return 'rock';
-  else if (rand == 2) return 'paper';
-  else return 'scissors';
-}
+// Generate a random number between 1 and 3
+let getComputerChoice = () => Math.ceil(Math.random() * 3);
 
 let getHumanChoice = function(again = false) {
   // Check that the user is not being prompted a second 
   // time and prompt the user with an appropriate message
-  let choice;
-  if (again) {
-    choice = prompt('The previous choice was invalid!\n\nPlease enter Rock, Paper or Scissors');
-  }
-  else {
-    choice = prompt('Please enter Rock, Paper or Scissors');
-  }
+  if (again) alert('The previous choice was invalid!');
+  let choice = prompt('Please enter Rock, Paper or Scissors');
 
   // Check that a choice was provided
   if (!choice) getHumanChoice(true);
@@ -27,40 +16,39 @@ let getHumanChoice = function(again = false) {
   // Convert the choice to lowercase
   choice = choice.toLowerCase();
 
-  // Check that the choice is valid
-  if (choice === 'rock' || choice === 'paper' || choice === 'scissors') {
-    return choice;
-  }
+  // Check that the choice is valid and return
+  if (choice === 'rock') return 1;
+  else if (choice === 'paper') return 2;
+  else if (choice === 'scissors') return 3;
   // Prompt the user again if the choice is not valid
   else return getHumanChoice(true);
 }
 
-// Convert the first character of a string to a capital
-let firstCharToCap = function(string) {
-  let first = string.charAt(0).toUpperCase();
-  let remainder = string.slice(1);
-  return first + remainder;
+// Convert the numbers back into words
+let numberToWord = function(num) {
+  if (num === 1) return 'Rock';
+  else if (num === 2) return 'Paper';
+  else return 'Scissors';
 }
 
 function playRound(humanChoice, computerChoice) {
+  // Convert the choices back into words
+  let humanWord = numberToWord(humanChoice);
+  let computerWord = numberToWord(computerChoice);
+
   // Check if both choices are the same
   if (humanChoice === computerChoice) {
-    humanChoice = firstCharToCap(humanChoice);
-    console.log(`DRAW - Both players chose ${humanChoice}!`);
+    console.log(`DRAW - Both players chose ${humanWord}!`);
   }
   // If the player wins
-  else if (humanChoice === 'rock' && computerChoice === 'scissors' || humanChoice === 'scissors' && computerChoice === 'paper' || humanChoice === 'paper' && computerChoice === 'rock') {
+  else if (computerChoice === 1 && humanChoice === 2 || computerChoice === 2 && humanChoice === 3 || computerChoice === 3 && humanChoice === 1) {
     humanScore++;
-    humanChoice = firstCharToCap(humanChoice);
-    computerChoice = firstCharToCap(computerChoice);
-    console.log(`YOU WON - The Computer chose ${computerChoice} but you played ${humanChoice}!`);
+    console.log(`YOU WON - The Computer chose ${computerWord} but you played ${humanWord}!`);
   }
   // If the computer wins
   else {
     computerScore++;
-    humanChoice = firstCharToCap(humanChoice);
-    computerChoice = firstCharToCap(computerChoice);
-    console.log(`YOU LOST - You chose ${humanChoice} but the Computer played ${computerChoice}!`);
+    console.log(`YOU LOST - You chose ${humanWord} but the Computer played ${computerWord}!`);
   }
 }
 
