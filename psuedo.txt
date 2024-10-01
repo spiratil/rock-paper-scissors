@@ -4,6 +4,9 @@ The player enters their choice into the console.
 The player then finds out what the computer has played and the result.
 
 MAIN
+  VARIABLE User's score starts at 0 (humanScore)
+  VARIABLE Computer's score starts at 0 (computerScore)
+
   FUNCTION EXPRESSION Generate a random number (getComputerChoice)
     CALCULATE a random number between 0 and 2
     CONVERT the random number to either "rock", "paper" or "scissors"
@@ -38,26 +41,20 @@ MAIN
     IF User's choice is the same as computer's choice
       INVOKE first character string capitalisation function
       PRINT the results to the screen
-      RETURN
     ELSE IF User chose Rock AND Computer chose Scissors
             OR User chose Scissors AND Computer chose Paper
             OR User chose Paper AND Computer chose Rock
       INCREASE the user's tally
       INVOKE first character string capitalisation function
       PRINT a message to the console to inform the user
-      RETURN
     ELSE
       INCREASE the computer's tally
       INVOKE first character string capitalisation function
       PRINT a message to the console to inform the user
-      RETURN
     END IF
   END FUNCTION
 
   FUNCTION Starts the game (playGame)
-    VARIABLE User's score starts at 0 (humanScore)
-    VARIABLE Computer's score starts at 0 (computerScore)
-
     FOR 5 rounds of the game
       INVOKE a game round
     END FOR
