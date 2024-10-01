@@ -1,3 +1,8 @@
+// Variable declarations
+const ROCK = 1;
+const PAPER = 2;
+const SCISSORS = 3;
+
 let humanScore = 0;
 let computerScore = 0;
 
@@ -17,17 +22,17 @@ let getHumanChoice = function(again = false) {
   choice = choice.toLowerCase();
 
   // Check that the choice is valid and return
-  if (choice === 'rock') return 1;
-  else if (choice === 'paper') return 2;
-  else if (choice === 'scissors') return 3;
+  if (choice === 'rock') return ROCK;
+  else if (choice === 'paper') return PAPER;
+  else if (choice === 'scissors') return SCISSORS;
   // Prompt the user again if the choice is not valid
   else return getHumanChoice(true);
 }
 
 // Convert the numbers back into words
 let numberToWord = function(num) {
-  if (num === 1) return 'Rock';
-  else if (num === 2) return 'Paper';
+  if (num === ROCK) return 'Rock';
+  else if (num === PAPER) return 'Paper';
   else return 'Scissors';
 }
 
@@ -41,7 +46,9 @@ function playRound(humanChoice, computerChoice) {
     console.log(`DRAW - Both players chose ${humanWord}!`);
   }
   // If the player wins
-  else if (computerChoice === 1 && humanChoice === 2 || computerChoice === 2 && humanChoice === 3 || computerChoice === 3 && humanChoice === 1) {
+  else if (computerChoice === ROCK && humanChoice === PAPER
+          || computerChoice === PAPER && humanChoice === SCISSORS
+          || computerChoice === SCISSORS && humanChoice === ROCK) {
     humanScore++;
     console.log(`YOU WON - The Computer chose ${computerWord} but you played ${humanWord}!`);
   }
